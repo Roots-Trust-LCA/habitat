@@ -55,7 +55,7 @@ The series is designed to be read in order, with each document building on what 
 
 ## License
 
-These documents are shared for the benefit of those interested in collective intelligence, cooperative organization, and regenerative institutional design.
+Hippocratic License 3.0 (HL3): An Ethical License for Open Source Communities
 
 ## Contact
 
