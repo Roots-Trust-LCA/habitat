@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitat: Infrastructure for Collective Intelligence</title>
+    <style>
+        :root {
+            --forest-dark: #1a2e1a;
+            --forest-mid: #2d4a2d;
+            --sage: #4a6741;
+            --moss: #6b8c5a;
+            --stone: #8b9a8b;
+            --mist: #c8d4c4;
+            --cloud: #e8efe6;
+            --snow: #f5f8f4;
+            --water-deep: #1e3a4c;
+            --water-mid: #2c5f7c;
+            --water: #4a8fa8;
+            --warm-white: #fdfcfa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.75;
+            color: var(--forest-dark);
+            background: var(--snow);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--forest-dark) 0%, var(--forest-mid) 50%, var(--water-deep) 100%);
+            color: var(--cloud);
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.4rem;
+            font-style: italic;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .hero .subtitle {
+            font-size: 1rem;
+            opacity: 0.7;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .container-wide {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        section:nth-child(even) {
+            background: var(--cloud);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--forest-mid);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--mist);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--sage);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--forest-mid);
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            color: var(--sage);
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--mist) 0%, var(--cloud) 100%);
+            border-left: 4px solid var(--moss);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-box.dark {
+            background: linear-gradient(135deg, var(--forest-mid) 0%, var(--water-deep) 100%);
+            color: var(--cloud);
+            border-left-color: var(--water);
+        }
+
+        .purpose-statement {
+            background: linear-gradient(135deg, var(--forest-mid) 0%, var(--water-deep) 100%);
+            color: var(--cloud);
+            padding: 3rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.8;
+            border-radius: 4px;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .concept-card {
+            background: var(--snow);
+            border: 1px solid var(--mist);
+            padding: 1.75rem;
+            border-radius: 4px;
+        }
+
+        .concept-card h4 {
+            font-size: 1.1rem;
+            color: var(--forest-mid);
+            margin-bottom: 0.75rem;
+            margin-top: 0;
+            font-weight: 600;
+        }
+
+        .concept-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            text-align: left;
+            line-height: 1.7;
+        }
+
+        .person-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .person-card {
+            background: var(--warm-white);
+            border: 1px solid var(--mist);
+            padding: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .person-card h4 {
+            font-size: 1rem;
+            color: var(--forest-mid);
+            margin-bottom: 0.25rem;
+            margin-top: 0;
+        }
+
+        .person-card .role {
+            font-size: 0.85rem;
+            color: var(--sage);
+            font-style: italic;
+            margin-bottom: 0.75rem;
+        }
+
+        .person-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--moss), var(--water));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 10px;
+            height: 10px;
+            background: var(--moss);
+            border-radius: 50%;
+            border: 2px solid var(--snow);
+        }
+
+        .timeline-item h4 {
+            font-size: 1rem;
+            color: var(--sage);
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .timeline-item p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .framework-box {
+            background: var(--warm-white);
+            border: 1px solid var(--mist);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .framework-box h4 {
+            margin-top: 0;
+            color: var(--forest-mid);
+            border-bottom: 1px solid var(--mist);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .framework-box p {
+            text-align: left;
+        }
+
+        .framework-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--moss);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--sage);
+        }
+
+        blockquote cite {
+            display: block;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            font-style: normal;
+            color: var(--stone);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--cloud) 0%, var(--mist) 100%);
+            color: var(--forest-dark);
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .cta-section h2 {
+            color: var(--forest-mid);
+            border-bottom-color: var(--moss);
+        }
+
+        .cta-section p {
+            text-align: center;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--forest-dark);
+            line-height: 1.9;
+        }
+
+        footer {
+            background: var(--forest-dark);
+            color: var(--stone);
+            text-align: center;
+            padding: 2.5rem;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        footer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            color: var(--sage);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--mist);
+        }
+
+        .lost-found {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .lost-found > div {
+            padding: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .lost-found .lost {
+            background: linear-gradient(135deg, #f5f0f0, #ebe5e5);
+            border-left: 4px solid #a08080;
+        }
+
+        .lost-found .found {
+            background: linear-gradient(135deg, var(--mist), var(--cloud));
+            border-left: 4px solid var(--moss);
+        }
+
+        .lost-found h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .lost-found ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .lost-found li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .lost-found {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            section {
+                padding: 3.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>HABITAT</h1>
+        <p class="tagline">Infrastructure for collective intelligence, cultivated in alignment with living systems</p>
+        <p class="subtitle">A purpose trust continuing the work of augmenting human capability</p>
+    </header>
+
+    <!-- SECTION 1: INTRODUCTION -->
+    <section>
+        <div class="container">
+            <h2>What Habitat Is</h2>
+            <p class="lead">Habitat is an institution dedicated to helping people work on complex problems together more effectively. We exist at the intersection of two streams: the human project of enhancing our capacity to think and work together, and the older, deeper intelligence of living systems that surrounds and sustains us.</p>
+            
+            <p>The name carries intention. A habitat is not merely a location but a set of conditions that support life. It is the relationship between organisms and their surroundings, shaped over time, sustaining and sustained by the life within it. We chose this name because we understand human thinking and collaboration as embedded within, not separate from, the living systems of Earth.</p>
+
+            <p>At our core, we are concerned with <strong>collective intelligence</strong>: the capacity of groups to understand situations, make decisions, and take action in ways that exceed what any individual member could accomplish alone. You have experienced this in its small forms. A good conversation where ideas build on each other. A team that somehow produces work better than the sum of its parts. A community that responds to crisis with coordination that nobody planned.</p>
+
+            <p>These moments hint at something important: that thinking and capability are not purely individual matters. They emerge from relationships, from shared tools and languages, from the ways we organize ourselves.</p>
+
+            <div class="highlight-box">
+                <p>But collective intelligence did not begin with humans. Long before our species developed language or tools, life on Earth was already solving coordination problems. Forests distribute resources through underground networks. Watersheds move water across landscapes through patterns refined over geological time. Flocks navigate without central command. The living world has been accumulating solutions to collective challenges for billions of years.</p>
+            </div>
+
+            <p>Habitat exists because we face problems that require collective intelligence at scales we have not yet achieved. Climate disruption, institutional failure, technological transformation, ecological degradation: these challenges are interconnected, fast-moving, and larger than any individual, organization, or even nation can address alone. Our tools for individual productivity have raced ahead while our tools for thinking together have lagged behind.</p>
+
+            <p>We believe this gap can be closed. Not through any single technology or method, but through patient, systematic work on the infrastructure that enables groups to think and act together effectively.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: HISTORICAL ROOTS -->
+    <section>
+        <div class="container">
+            <h2>A Lineage Worth Continuing</h2>
+            <p class="section-intro">Habitat does not emerge from nothing. We inherit from a lineage of thinkers and practitioners who worked on similar problems, most notably the team at the Augmentation Research Center in the 1960s and 1970s.</p>
+
+            <h3>The Augmentation Research Center</h3>
+            <p>In 1963, a research laboratory was established at Stanford Research Institute with an ambitious goal: developing tools and methods that would enhance human capacity to deal with complex, urgent problems. The laboratory was called the <strong>Augmentation Research Center</strong>, often abbreviated as ARC.</p>
+
+            <p>The laboratory's philosophical direction came from Douglas Engelbart, but the work was deeply collaborative. Engineers, programmers, and researchers contributed innovations that Engelbart himself said "had to be explained to me before I could understand them. The staff deserves more recognition."</p>
+
+            <p>The team called their work <strong>augmentation</strong>: using technology not to replace human thinking but to extend it, the way a bicycle extends human locomotion or a telescope extends human vision. This word choice was deliberate. "Artificial intelligence," the fashionable framing of the era, implied machines that would think instead of humans. Augmentation implied machines that would help humans think better.</p>
+
+            <h3>The Philosophical Framework</h3>
+            <p>Engelbart proposed a model called <strong>H-LAM/T</strong>: Human using Language, Artifacts, and Methodology, in which the human is Trained. This model located capability not inside the individual brain but in the system formed by a person interacting with their tools, methods, and learned skills.</p>
+
+            <div class="framework-box">
+                <h4>The H-LAM/T Insight</h4>
+                <p>A person with a pencil and paper is a different cognitive system than a person without. A person trained in formal logic reasons differently than one without that training. A group with shared vocabulary can coordinate in ways that a group without shared vocabulary cannot.</p>
+                <p>Capability emerges from the configuration of the whole system, not from any single component. If you want to enhance capability, you must attend to all the elements: tools, methods, language, and training. These must develop together. The team used the term <strong>co-evolution</strong> for this interdependent development.</p>
+            </div>
+
+            <h3>Key Concepts from ARC</h3>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>Collective IQ</h4>
+                    <p>A group's capability to work on complex, urgent problems together. Distinct from the sum of individual IQs. A group of brilliant individuals can have low collective IQ if they lack shared language, compatible methods, and appropriate infrastructure. Conversely, groups of ordinary people with good collaborative infrastructure can outperform brilliant individuals.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Bootstrapping</h4>
+                    <p>Using your own tools to develop your own tools. The ARC team used their system (NLS) to build NLS. They were simultaneously the development team, the user community, and the subject of study. This created tight feedback loops where problems were discovered quickly and solutions could be tested immediately in real work.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>The A/B/C Framework</h4>
+                    <p><strong>A-level:</strong> Doing your primary work. <strong>B-level:</strong> Improving how you do your work. <strong>C-level:</strong> Improving how you improve. Most organizations focus almost entirely on A-level, occasionally invest in B-level, and almost never think systematically about C-level. But C-level work has compounding returns.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Improvement Infrastructure</h4>
+                    <p>The combination of tools, methods, and organizational forms that enable ongoing capability development. Rather than solving individual problems, build the infrastructure that helps you solve problems better over time. This is the highest-leverage investment an organization or society can make.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Dynamic Knowledge Repository</h4>
+                    <p>A shared, evolving body of knowledge that a community maintains together. Not a static archive but a living collection that grows, reorganizes, and improves as the community's understanding develops. Documents link to each other, can be versioned, annotated, and restructured as understanding evolves.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Expert-User Orientation</h4>
+                    <p>Tools designed to reward investment. The system had a learning curve, but skilled users could work with remarkable fluency. This is different from optimizing for immediate accessibility. The commitment to expert performance acknowledges that deep capability requires sustained practice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: THE TEAM AND THE DEMO -->
+    <section>
+        <div class="container">
+            <h2>The Mother of All Demos</h2>
+            <p class="section-intro">On December 9, 1968, the ARC team presented their work at the Fall Joint Computer Conference in San Francisco. The ninety-minute presentation has become legendary in computing history, often called "The Mother of All Demos."</p>
+
+            <p>The demonstration was a collective achievement. Seventeen people contributed to making it happen. Understanding who they were helps us understand that collective intelligence is not just a concept but a practice.</p>
+
+            <h3>The Ensemble</h3>
+            <div class="person-grid">
+                <div class="person-card">
+                    <h4>Douglas Engelbart</h4>
+                    <div class="role">Philosophical Leader</div>
+                    <p>Articulated the augmentation framework that gave the laboratory its direction. Created conditions where talented people could do innovative work. Presented on stage but connected to the team thirty miles away.</p>
+                </div>
+                <div class="person-card">
+                    <h4>Bill English</h4>
+                    <div class="role">Chief Hardware Engineer</div>
+                    <p>Built the first mouse prototype. Designed the entire distributed infrastructure for the demo: custom modems, microwave video links, switching systems. Operated the video switcher backstage throughout the presentation.</p>
+                </div>
+                <div class="person-card">
+                    <h4>Jeff Rulifson</h4>
+                    <div class="role">Lead Programmer</div>
+                    <p>Designed and wrote much of the software. Created the command language, the display editor, led hypertext implementation. Played crucial social role translating abstract vision into concrete steps others could take.</p>
+                </div>
+                <div class="person-card">
+                    <h4>Bill Paxton</h4>
+                    <div class="role">Programmer, Remote Collaborator</div>
+                    <p>Appeared on screen from Menlo Park to demonstrate collaboration features, drawing diagrams and showing database functionality. His presence thirty miles away proved remote collaboration actually worked.</p>
+                </div>
+                <div class="person-card">
+                    <h4>Don Andrews</h4>
+                    <div class="role">Team Member</div>
+                    <p>Contributed via the link from Menlo Park, part of the core team that showed collaborative capabilities in action during the live demonstration.</p>
+                </div>
+                <div class="person-card">
+                    <h4>Stewart Brand</h4>
+                    <div class="role">Camera Operator</div>
+                    <p>Operated a camera in Menlo Park. Would later found the Whole Earth Catalog. His presence represented the intersection of military-funded research and countercultural exploration that characterized early Silicon Valley.</p>
+                </div>
+            </div>
+
+            <h3>What They Demonstrated</h3>
+            <p>The audience was seeing technologies that would not become mainstream for decades:</p>
+
+            <div class="two-column">
+                <div>
+                    <p><strong>The mouse</strong> as a pointing device. Moving this small wooden device on the desk moved a cursor on the screen. In 1968, the standard way to indicate a location was to type coordinates. The idea of pointing at what you meant was new.</p>
+                    <p><strong>Hypertext linking.</strong> Documents could contain links to other documents or specific locations within documents. Clicking a link took you to the linked location. The team navigated through interconnected documents, following chains of reference.</p>
+                    <p><strong>Structured documents.</strong> Text was not a flat stream but a hierarchy of statements. You could collapse sections to see headings, expand for detail, reorganize by moving branches, view content at different levels of detail.</p>
+                </div>
+                <div>
+                    <p><strong>Real-time collaborative editing.</strong> Engelbart in San Francisco and team members in Menlo Park worked on the same documents simultaneously, seeing each other's changes in real time. This was decades before Google Docs.</p>
+                    <p><strong>Video conferencing.</strong> The remote team members were visible on screen. The audience could see Rulifson's face as he explained the software, watch Paxton's hands as he drew diagrams. Communication was not just text but presence.</p>
+                    <p><strong>Integrated environment.</strong> Writing, linking, communicating, and collaborating happened in the same system. The power came from integration, not from any single feature.</p>
+                </div>
+            </div>
+
+            <blockquote>
+                The demonstration was a demonstration of collective intelligence by people building collective intelligence tools. The seventeen people who made it happen were themselves evidence for the thesis they were presenting.
+            </blockquote>
+
+            <h3>Context: Computing in 1968</h3>
+            <p>To understand what the demonstration meant, consider what computing looked like before it. Most people who used computers did not interact with them directly. The dominant mode was <strong>batch processing</strong>: write your program on paper, transfer it to punch cards, submit the cards to an operator, wait (often overnight) for printed results. The computer was in a room somewhere, tended by specialists.</p>
+
+            <p>The computer mouse did not reach most users until the Apple Macintosh in 1984. Hypertext did not become widespread until the World Wide Web in the 1990s. Real-time collaborative editing did not become common until the 2000s. Video conferencing did not become routine until the 2010s. The audience in 1968 was seeing the future demonstrated in working form.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 4: WHAT WAS LOST -->
+    <section>
+        <div class="container">
+            <h2>What Was Lost in Translation</h2>
+            <p class="section-intro">The story after 1968 is partly triumph and partly tragedy. The ideas spread, transformed, and in many ways were diluted as they moved through institutions with different priorities.</p>
+
+            <p>In the early 1970s, many ARC team members left to join Xerox PARC, a new research center with substantial resources. Bill English brought the mouse. Jeff Rulifson brought software architecture. The ideas were refined and developed into the Alto computer, the Smalltalk environment, and eventually influenced Apple's Macintosh, Microsoft Windows, and the entire personal computing industry.</p>
+
+            <p>But there was drift. Engelbart had designed for expert users doing complex knowledge work. The industry shifted toward making computers accessible to casual users. This democratization was valuable, but it came with tradeoffs. The ceiling was lowered so the floor could be lowered.</p>
+
+            <p>More fundamentally, the philosophical framework did not transfer. People adopted the mouse without adopting the augmentation mindset.</p>
+
+            <div class="lost-found">
+                <div class="lost">
+                    <h4>What Was Lost</h4>
+                    <ul>
+                        <li>The augmentation framework and focus on collective IQ</li>
+                        <li>The A/B/C framework for improvement work</li>
+                        <li>Expert-user orientation rewarding investment</li>
+                        <li>Fine-grained addressability (linking to specific paragraphs)</li>
+                        <li>Bidirectional links (knowing what links to you)</li>
+                        <li>Integrated versioning for all documents</li>
+                        <li>Unified working environment</li>
+                        <li>Collective intelligence as explicit design goal</li>
+                        <li>C-level improvement infrastructure</li>
+                    </ul>
+                </div>
+                <div class="found">
+                    <h4>What Survived</h4>
+                    <ul>
+                        <li>The mouse as pointing device</li>
+                        <li>Windowing systems</li>
+                        <li>Hypertext (simplified as the web)</li>
+                        <li>Email (fragmented from document work)</li>
+                        <li>Video conferencing (decades later)</li>
+                        <li>Collaborative editing (decades later)</li>
+                        <li>The interaction paradigm of direct manipulation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>The surface technologies became ubiquitous. The deeper purpose was largely lost. Computers became tools for individual productivity and entertainment rather than infrastructure for collective intelligence. The mouse survived; the mission did not.</p>
+
+            <p>Habitat picks up that thread. We inherit the insight that capability is systemic, the focus on collective intelligence, the A/B/C framework, and the bootstrapping methodology. We learn from the ways the original vision was diluted and try to create institutional conditions that protect against similar drift.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 5: THE ECOLOGICAL TURN -->
+    <section>
+        <div class="container">
+            <h2>The Ecological Turn</h2>
+            <p class="section-intro">Habitat extends the ARC framework by learning from living systems. We call this "the ecological turn": a shift toward understanding human collective intelligence as nested within, and able to learn from, the larger patterns of coordination and adaptation that life on Earth has developed over billions of years.</p>
+
+            <p>The H-LAM/T model located capability in the system of humans, tools, methods, and training. But this system floats in an unmarked background. It does not specify what surrounds and supports it. The framework attends to humans and their tools but not to the living context that makes human activity possible.</p>
+
+            <p>This extension is natural rather than contradictory. If capability emerges from systems, and if living systems have been developing coordination capabilities for billions of years, then attending to those living systems is a reasonable expansion of the augmentation project.</p>
+
+            <h3>Earth as Memory</h3>
+            <p>A forest is not just a collection of trees. It is a system that has developed over thousands of years, accumulating solutions to the challenges of that particular place. The composition of species, the structure of relationships, the patterns of nutrient cycling: all represent information about how to thrive in that environment. This information is not stored in documents. It is embodied in the physical relationships between organisms and their surroundings.</p>
+
+            <p>We can think of this as memory in a functional sense: information preserved through time that shapes present behavior. Earth's memory is not conscious recall, but it is available to be learned from. When we face coordination challenges, we can ask: how do living systems handle similar challenges?</p>
+
+            <h3>Patterns from Living Systems</h3>
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>Nested Intelligence</h4>
+                    <p>Intelligence operates at multiple scales: cells, organisms, social groups, ecosystems, biosphere. Each scale is nested within larger scales, both shaping and being shaped by them. Human collective intelligence is one layer within this structure, not separate from it. What happens at one scale affects the others.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Metabolic Awareness</h4>
+                    <p>Every activity has a material dimension. Systems have inputs, throughputs, and outputs. Systems produce waste. Living systems that persist have generally solved their metabolic challenges: they participate in cycles rather than depleting stocks. Human institutions that ignore their metabolism tend to be fragile.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Stigmergic Coordination</h4>
+                    <p>Living systems often coordinate through modifications to shared environment rather than direct communication. Ants leave pheromone trails; other ants follow. Termites build by responding to current structure. Coordination happens through the shared medium, accumulating over time without requiring participants to be present simultaneously.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Succession</h4>
+                    <p>Ecosystems develop through stages, each creating conditions for the next. Pioneer species arrive first, modify the environment, create conditions for later species. Human organizations also go through developmental stages. What works at one stage may not work at another. Healthy succession includes endings: letting go of what no longer serves.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Mutualism</h4>
+                    <p>Living systems contain many relationships where different organisms benefit from association. The augmentation framework proposes a mutualistic relationship between humans and tools: both benefit from the association. This frame extends to relationships between groups and between humans and living systems.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Resilience</h4>
+                    <p>The capacity to absorb disturbance while maintaining essential function. Different from efficiency, and often in tension with it. Living systems that persist have redundancy, diversity, and reserves. Human institutions under pressure often sacrifice resilience for efficiency, which works until conditions change.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Edge Effects</h4>
+                    <p>Boundaries between ecosystems often have higher productivity and diversity than either ecosystem alone. Human knowledge and organizations also have edges: disciplinary boundaries, organizational boundaries. Interesting things happen at boundaries where different systems interact and novel combinations become possible.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Keystone Functions</h4>
+                    <p>Some species or roles have disproportionate effects on the whole system. Remove the keystone predator and the ecosystem transforms. Human systems have analogous keystone functions: facilitation, documentation, translation between groups. These may not be glamorous but removing them degrades the whole.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Mycorrhizal Patterns</h4>
+                    <p>Underground fungal networks connect trees, allowing resources to flow from abundance to need without market pricing or central allocation. Resources move through relationships according to gradients. Human resource sharing often defaults to markets or hierarchies; mycorrhizal patterns suggest alternatives.</p>
+                </div>
+            </div>
+
+            <p>These patterns are not metaphors. They are existence proofs that collective intelligence can work, that coordination without central control is possible, that complexity can be navigated through relationship and pattern rather than hierarchy and command.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 6: PURPOSE AND STRUCTURE -->
+    <section>
+        <div class="container">
+            <h2>Purpose Over Ownership</h2>
+            <p class="section-intro">Habitat is organized as a purpose trust: an institutional form accountable to a purpose rather than to owners. This structure addresses the drift that affected the original augmentation vision.</p>
+
+            <p>Most organizations are ultimately accountable to whoever owns or controls them. A corporation serves shareholders. A nonprofit serves its board. A cooperative serves its members. In each case, the interests of controlling parties shape organizational decisions.</p>
+
+            <p>A purpose trust inverts this pattern. Its founding documents define a purpose, and trustees are responsible for ensuring the organization serves that purpose, not for maximizing returns to any human constituency.</p>
+
+            <div class="purpose-statement">
+                <strong>Habitat's purpose:</strong><br><br>
+                To cultivate conditions that enhance humanity's collective capacity to understand and respond wisely to complex challenges, in alignment with the living systems that sustain all life on Earth.
+            </div>
+
+            <p>This purpose sits above everyone involved with Habitat. Staff, members, participants, funders, trustees: all are understood as serving the purpose rather than being served by the organization. No one owns Habitat. The purpose owns Habitat.</p>
+
+            <p>The phrase "in alignment with living systems" is not decorative. It means decisions must account for ecological impact. Short-term human convenience cannot override long-term living system health. We understand human collective intelligence as nested within and dependent upon Earth's larger patterns of life.</p>
+
+            <h3>Nested Governance</h3>
+            <p>Habitat's governance is designed in nested form: a current operating structure appropriate for building and learning, and a future governance layer to be created once certain conditions are met.</p>
+
+            <div class="framework-box">
+                <h4>Roots Trust LCA (Current)</h4>
+                <p>Habitat currently operates through Roots Trust LCA, a Colorado Limited Cooperative Association. The cooperative structure is appropriate for the current phase: establishing patterns, learning through use, responding to emerging needs. The multi-stakeholder form allows different constituencies (user organizations, service providers, infrastructure contributors) to share governance power.</p>
+                <p>The cooperative is accountable to its members. This is appropriate and necessary. But member interests can, over time, drift from broader institutional purpose.</p>
+            </div>
+
+            <div class="framework-box">
+                <h4>Purpose Trust (Future)</h4>
+                <p>As Habitat grows and accumulates sufficient assets for long-term sustainability, a separate Purpose Trust entity will be created. This structure will not replace the cooperative but will oversee it, providing a governance layer explicitly accountable only to Habitat's stated purpose.</p>
+                <p>When conflicts arise between stakeholder interests and institutional purpose, the Purpose Trust will have authority to protect the purpose. It cannot be controlled by members, persuaded by market opportunity, or captured by any constituency. It exists solely to ensure Habitat remains faithful to its founding commitment.</p>
+            </div>
+
+            <h3>The Depository Function</h3>
+            <p>Organizations entrust Habitat with observations that capture their first-order realities: actual dynamics of capability development, knowledge accumulation, relationship health, and enabling conditions. This data is evidence of organizational life, not raw material for extraction.</p>
+
+            <p>Habitat's <strong>depository function</strong> treats organizational data accordingly. Organizations own their observations. Habitat holds them in trust. The system employs cryptographic methods allowing verification without requiring trust: you can verify your data exists, has not been altered, and is held securely.</p>
+
+            <p>Data decay is linked to active cultivation. Without attention, observations naturally archive at lower resolution. Organizations prevent decay by allocating resources to preservation. This creates a system where organizational attention determines what receives deepest preservation. Knowledge requires cultivation, not just collection.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 7: HOW IT WORKS -->
+    <section>
+        <div class="container">
+            <h2>How Habitat Works</h2>
+            <p class="section-intro">Habitat helps organizations understand their first-order realities: the actual dynamics that determine organizational health, not the second-order abstractions most systems track.</p>
+
+            <h3>The Basic Rhythm</h3>
+            <p>Most organizational use of Habitat follows a simple cycle:</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Observe</h4>
+                    <p>Someone describes what is happening in natural language. A voice note, a written reflection, a brief capture. "Spent two hours debugging the authentication flow, realized our documentation is outdated, made a note to update it next week."</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Extract</h4>
+                    <p>Semantic processors analyze the description and extract structured information: resources consumed, events that occurred, agents involved, conditions revealed, relationships affected. Natural language becomes structured data using the REA (Resources, Events, Agents) and RCB (Relationships, Conditions, Boundaries) frameworks.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Review</h4>
+                    <p>The person who made the observation evaluates accuracy. Did the system capture what actually happened? This step is organizational reflection disguised as quality control. Seeing your work reflected back often reveals patterns you did not consciously notice.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Commit</h4>
+                    <p>Approved observations join organizational memory. They become queryable, connect to other observations, contribute to emerging patterns. Understanding builds through accumulation rather than isolated snapshots.</p>
+                </div>
+            </div>
+
+            <h3>Temporal Scales</h3>
+            <p>Habitat operates across multiple temporal scales simultaneously, matching different kinds of understanding to their natural rhythms:</p>
+
+            <div class="two-column">
+                <div>
+                    <p><strong>Daily practice</strong> captures immediate work. What happened today? What did you notice? A few minutes of reflection builds the raw material from which longer-term patterns emerge.</p>
+                    <p><strong>Weekly cycles</strong> surface emerging patterns. What themes appeared? What resources were constrained? What relationships received attention?</p>
+                    <p><strong>Monthly analysis</strong> examines trends. Are capabilities developing as intended? How are relationships evolving? What conditions have shifted?</p>
+                </div>
+                <div>
+                    <p><strong>Quarterly reflection</strong> considers strategic questions. Is this initiative serving its purpose? What has accumulated observation taught us?</p>
+                    <p><strong>Seasonal and annual rhythms</strong> examine year-over-year changes. How has collective capability changed? What relationships have deepened or frayed?</p>
+                    <p>This matches how living systems operate: fast variables nested within slow variables, both affecting each other.</p>
+                </div>
+            </div>
+
+            <h3>Service Credits</h3>
+            <p><strong>Service credits</strong> function as internal currency, enabling reciprocal contribution beyond financial capital. Someone with technical skill but limited cash might develop processors, earning credits that offset subscription costs. An organization with excess computing capacity might provide hosting. A facilitator might help other organizations implement observation practices.</p>
+
+            <p>Value flows through multiple channels rather than reducing everything to financial transaction. Organizations contribute according to their circumstances and receive according to their needs. This creates economic resilience independent of external funding sources.</p>
+
+            <h3>Bootstrapping in Practice</h3>
+            <p>Habitat uses its own tools to understand its own organizational dynamics. Every significant change gets documented as an observation. We track our own first-order realities: capability development, relationship health, knowledge accumulation, enabling conditions.</p>
+
+            <p>This creates tight feedback loops. Problems with tools and methods are discovered through actual use. The distance between design and use collapses. The system improves itself through its own operation, just as the ARC team used NLS to develop NLS.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 8: PARTICIPATION -->
+    <section>
+        <div class="container">
+            <h2>Participation Pathways</h2>
+            <p class="section-intro">Habitat operates as cooperative infrastructure, owned and governed by those who use it. Unlike platforms that extract value from users, Habitat returns value through shared ownership, transparent governance, and tools designed for organizational sovereignty.</p>
+
+            <h3>Stakeholder Classes</h3>
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>User Organizations</h4>
+                    <p>Engage Habitat to understand their own operations. Contribute through regular patronage. Their daily use generates practical wisdom about what organizational intelligence actually requires. Not customers extracting value but members cultivating shared infrastructure.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Worker Contributors</h4>
+                    <p>Maintain infrastructure, develop capabilities, help organizations implement, participate in governance. In the cooperative structure, workers are member-owners whose participation includes fair compensation and patronage rights proportional to contribution.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Development Partners</h4>
+                    <p>Bring specialized capabilities: semantic processors for domain-specific extraction, implementation patterns, research validating conceptual coherence, technology integration. These contributions extend Habitat's reach without centralizing control.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Capital Contributors</h4>
+                    <p>Provide patient financial resources without extractive returns. Habitat distinguishes speculation from genuine capital provision. Returns are capped and subordinated to usage and labor patronage, aligning financial participation with cooperative sustainability.</p>
+                </div>
+            </div>
+
+            <h3>Progression of Engagement</h3>
+            <p>There is no required sequence. People engage based on circumstances, capabilities, and interests. The system grows stronger through diversity of participation.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Curiosity</h4>
+                    <p>Understanding begins with witnessing how organizational observation works. Read, watch, ask questions. There is no pressure to commit before you understand.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Personal Practice</h4>
+                    <p>Capture observations about your own work. Review what surfaces. Notice patterns invisible in the moment but clear in accumulation. Personal practice is valuable in its own right.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Organizational Implementation</h4>
+                    <p>Begin with basic observation. Add documentation of capabilities. Introduce project tracking. Layer in patterns as organizational practice matures. Each module delivers independent value.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Formal Membership</h4>
+                    <p>Gain governance voice proportional to patronage contribution. Voting rights, eligibility for board service, participation in strategic planning. Membership carries responsibilities alongside benefits.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Contribution</h4>
+                    <p>Develop new patterns, refine extraction logic, share implementation wisdom, participate in governance. The framework grows through collective refinement, with diverse capabilities complementing each other.</p>
+                </div>
+            </div>
+
+            <h3>Patronage and Value Return</h3>
+            <p>Annual surpluses return to members proportionally based on participation across multiple dimensions: <strong>usage patronage</strong> (consistent engagement), <strong>labor patronage</strong> (worker contribution), <strong>relationship patronage</strong> (sustained engagement and mentorship), and <strong>capital patronage</strong> (financial contribution, capped and subordinated).</p>
+
+            <p>This model embodies the cooperative principle: those affected by decisions should have voice in making them, proportional to actual participation rather than capital investment.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 9: INVITATION -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>An Invitation</h2>
+            <p>We face challenges that require collective intelligence at scales we have not yet achieved. Climate disruption, institutional failure, ecological degradation: these are interconnected, fast-moving, and larger than any individual or organization can address alone.</p>
+            
+            <p>Habitat exists because we believe this gap can be closed. Not through any single technology or method, but through patient, systematic work on the infrastructure that enables groups to think and act together effectively.</p>
+            
+            <p>This is patient work. We are not promising quick fixes. The challenges developed over decades and centuries; addressing them requires sustained effort over similar timescales. Living systems teach us that lasting change often happens slowly, through accumulated small adjustments.</p>
+            
+            <p>This is humble work. We do not claim to have the answers. We are learning as we go, making mistakes, revising our approaches. The spirit is experimental: try things, observe results, adjust, try again.</p>
+            
+            <p>This is collective work. By definition, it cannot be done alone. It requires communities of people contributing different perspectives, skills, and experiences. Whatever you bring, there is likely a way it can contribute.</p>
+            
+            <p>And this is rooted work. We are supported by Earth, by the patterns of living systems that have preceded us, by the accumulated wisdom of billions of years of life learning to coordinate, adapt, and flourish together.</p>
+            
+            <p>Habitat simply names an attempt to participate more consciously in that ongoing process.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>Habitat</strong> is a purpose trust cultivating infrastructure for collective intelligence.</p>
+        <p>Currently operating through Roots Trust LCA, a Colorado Limited Cooperative Association.</p>
+        <p>Continuing the work of the Augmentation Research Center, in alignment with living systems.</p>
+    </footer>
+
+</body>
+</html>

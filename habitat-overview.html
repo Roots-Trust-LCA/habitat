@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitat: Infrastructure for Collective Intelligence</title>
+    <style>
+        :root {
+            --forest-dark: #1a2e1a;
+            --forest-mid: #2d4a2d;
+            --sage: #4a6741;
+            --moss: #6b8c5a;
+            --stone: #8b9a8b;
+            --mist: #c8d4c4;
+            --cloud: #e8efe6;
+            --snow: #f5f8f4;
+            --water-deep: #1e3a4c;
+            --water-mid: #2c5f7c;
+            --water: #4a8fa8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            color: var(--forest-dark);
+            background: var(--snow);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--forest-dark) 0%, var(--forest-mid) 50%, var(--water-deep) 100%);
+            color: var(--cloud);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            font-style: italic;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        section:nth-child(even) {
+            background: var(--cloud);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--forest-mid);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--mist);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .lead {
+            font-size: 1.15rem;
+            color: var(--sage);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--mist) 0%, var(--cloud) 100%);
+            border-left: 4px solid var(--moss);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .purpose-statement {
+            background: linear-gradient(135deg, var(--forest-mid) 0%, var(--water-deep) 100%);
+            color: var(--cloud);
+            padding: 2.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+            font-style: italic;
+            border-radius: 4px;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .concept-card {
+            background: var(--snow);
+            border: 1px solid var(--mist);
+            padding: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .concept-card h3 {
+            font-size: 1.1rem;
+            color: var(--forest-mid);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .concept-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            text-align: left;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--moss), var(--water));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 10px;
+            height: 10px;
+            background: var(--moss);
+            border-radius: 50%;
+            border: 2px solid var(--snow);
+        }
+
+        .timeline-item h3 {
+            font-size: 1rem;
+            color: var(--sage);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--forest-dark) 0%, var(--forest-mid) 100%);
+            color: var(--cloud);
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .cta-section h2 {
+            color: var(--cloud);
+            border-bottom-color: var(--moss);
+        }
+
+        .cta-section p {
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: var(--forest-dark);
+            color: var(--stone);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>HABITAT</h1>
+        <p class="tagline">Infrastructure for collective intelligence, cultivated in alignment with living systems</p>
+    </header>
+
+    <section>
+        <div class="container">
+            <h2>What Habitat Is</h2>
+            <p class="lead">Habitat is an institution dedicated to helping people work on complex problems together more effectively.</p>
+            
+            <p>The name carries intention. A habitat is not merely a location but a set of conditions that support life. It is the relationship between organisms and their surroundings, shaped over time, sustaining and sustained by the life within it. We chose this name because we understand human thinking and collaboration as embedded within, not separate from, the living systems of Earth.</p>
+
+            <p>We are concerned with <strong>collective intelligence</strong>: the capacity of groups to understand situations, make decisions, and take action in ways that exceed what any individual member could accomplish alone. You have experienced this in its small forms. A good conversation where ideas build on each other. A team that produces work better than the sum of its parts. A community that responds to crisis with coordination that nobody planned.</p>
+
+            <p>But collective intelligence did not begin with humans. Long before our species developed language or tools, life on Earth was already solving coordination problems. Forests distribute resources through underground networks. Watersheds move water across landscapes through patterns refined over geological time. The living world has been accumulating solutions to collective challenges for billions of years.</p>
+
+            <p>Habitat exists at this intersection: between the human project of enhancing our capacity to think and work together, and the older, deeper intelligence of living systems that surrounds and sustains us.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>A Lineage Worth Continuing</h2>
+            <p>In the 1960s, a research laboratory called the Augmentation Research Center was established at Stanford Research Institute with an ambitious goal: developing tools and methods that would enhance human capacity to deal with complex, urgent problems.</p>
+
+            <p>The team called their work <strong>augmentation</strong>: using technology not to replace human thinking but to extend it, the way a bicycle extends human locomotion or a telescope extends human vision. They built working systems demonstrating ideas decades ahead of their time: the computer mouse, hypertext linking, video conferencing, collaborative editing. On December 9, 1968, seventeen people demonstrated these capabilities to an audience that was seeing 1990s technology in 1968.</p>
+
+            <p>Much of this vision was lost as the ideas spread into mainstream computing. The industry adopted the interface innovations while largely ignoring their deeper purpose. Computers became tools for individual productivity and entertainment rather than infrastructure for collective intelligence. The mouse survived; the mission did not.</p>
+
+            <p>Habitat picks up that thread. We take seriously the insight at the core of the Augmentation Research Center's work: that capability is not located inside individual minds but emerges from the interaction between people, their tools, their methods, and their training. And we extend that framework with a recognition the original team did not fully articulate: that human collective intelligence is not a separate project but a participation in patterns of coordination that life on Earth has been developing since its beginning.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Learning from Living Systems</h2>
+            <p>If the Augmentation Research Center gave us the vision of enhancing human collective capability, the living world gives us a library of patterns for how such capability can work.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>Nested Intelligence</h3>
+                    <p>Intelligence operates at multiple scales, from cells to organisms to ecosystems to the biosphere. Human collective intelligence is one layer within this nested structure, not separate from it.</p>
+                </div>
+                <div class="concept-card">
+                    <h3>Earth as Memory</h3>
+                    <p>Living systems accumulate information over time. A forest embodies knowledge about how to thrive in its place. The Earth itself holds billions of years of accumulated solutions to the challenges of living together.</p>
+                </div>
+                <div class="concept-card">
+                    <h3>Metabolic Awareness</h3>
+                    <p>Every activity has a material dimension. Systems have inputs, throughputs, and outputs. Attending to these flows keeps us grounded in physical reality and aligned with sustainable patterns.</p>
+                </div>
+                <div class="concept-card">
+                    <h3>Stigmergic Coordination</h3>
+                    <p>Living systems often coordinate through modifications to shared environment rather than direct communication. Traces left by one participant shape the behavior of others who follow.</p>
+                </div>
+                <div class="concept-card">
+                    <h3>Succession</h3>
+                    <p>Ecosystems develop through stages, each creating conditions for the next. Human organizations also go through developmental phases that require different approaches at different times.</p>
+                </div>
+                <div class="concept-card">
+                    <h3>Resilience</h3>
+                    <p>Living systems that persist have redundancy, diversity, and reserves. They can absorb disturbance while maintaining essential function. Resilience often trades off against efficiency.</p>
+                </div>
+            </div>
+
+            <p>These patterns are not metaphors. They are existence proofs that collective intelligence can work, that coordination without central control is possible, that complexity can be navigated through relationship and pattern rather than hierarchy and command.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Purpose Over Ownership</h2>
+            <p>Habitat is organized as a <strong>purpose trust</strong>: an institutional form accountable to a purpose rather than to owners. Most organizations are ultimately accountable to whoever owns or controls them. A purpose trust inverts this pattern. Its founding documents define a purpose, and trustees are responsible for ensuring the organization serves that purpose, not for maximizing returns to any human constituency.</p>
+
+            <div class="purpose-statement">
+                To cultivate conditions that enhance humanity's collective capacity to understand and respond wisely to complex challenges, in alignment with the living systems that sustain all life on Earth.
+            </div>
+
+            <p>This purpose sits above everyone involved with Habitat. Staff, members, participants, funders, trustees: all are understood as serving the purpose rather than being served by the organization. No one owns Habitat. The purpose owns Habitat.</p>
+
+            <p>This structure addresses the drift that affected the original augmentation vision. As those ideas spread to other institutions, the purpose was dropped while surface technologies were adopted. Habitat's purpose trust structure creates legal accountability to mission, making drift visible and providing mechanisms for correction.</p>
+
+            <p>The phrase "in alignment with living systems" is not decorative. It means that decisions must account for ecological impact, that short-term human convenience cannot override long-term living system health, and that we understand human collective intelligence as nested within and dependent upon Earth's larger patterns of life.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>How It Works</h2>
+            <p>Habitat currently operates through <strong>Roots Trust LCA</strong>, a Colorado Limited Cooperative Association. This cooperative structure is appropriate for the current phase: establishing patterns, learning through use, responding to emerging needs. As Habitat matures and accumulates sufficient assets, a separate Purpose Trust entity will be created to oversee the cooperative and ensure long-term fidelity to purpose.</p>
+
+            <div class="highlight-box">
+                <p><strong>The Basic Rhythm:</strong> Organizations use Habitat by observing their work in natural language, allowing semantic processors to extract structured information, reviewing what was extracted for accuracy, and committing approved observations to organizational memory. Understanding builds through accumulation rather than isolated snapshots.</p>
+            </div>
+
+            <p>The system tracks seven forms of capital (financial, human, temporal, social, produced, natural, and cultural) using two complementary frameworks: REA (Resources, Events, Agents) provides vocabulary for describing organizational activity, while RCB (Relationships, Conditions, Boundaries) captures relational and contextual dynamics.</p>
+
+            <p>Habitat practices what it offers. We use our own tools to understand our own organizational dynamics. This bootstrapping methodology, inherited from the Augmentation Research Center, creates tight feedback loops where problems are discovered quickly and improvements accumulate steadily.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Participation</h2>
+            <p>Habitat operates as cooperative infrastructure, owned and governed by the organizations and individuals who use it. Unlike platforms that extract value from users, Habitat returns value to participants through shared ownership, transparent governance, and tools designed for organizational sovereignty rather than vendor dependence.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Curiosity</h3>
+                    <p>Understanding begins with witnessing how organizational observation actually works. Read, watch, ask questions. There is no pressure to commit before you understand.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Personal Practice</h3>
+                    <p>Capture observations about your own work. Review what surfaces. Notice patterns invisible in the moment but clear in accumulation.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Organizational Implementation</h3>
+                    <p>Begin with basic observation to establish the habit of witnessing work as it happens. Layer in additional patterns as organizational practice matures.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Membership and Governance</h3>
+                    <p>Sustained participants gain governance voice proportional to their contribution. The cooperative belongs to those who use it.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Contribution</h3>
+                    <p>Develop new patterns, refine extraction logic, share implementation wisdom, participate in strategic direction. The framework grows through collective refinement.</p>
+                </div>
+            </div>
+
+            <p>Service credits function as internal currency, enabling contribution beyond financial capital. Organizations and individuals contribute according to their circumstances and receive according to their needs. Value flows through multiple channels rather than reducing everything to financial transaction.</p>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>An Invitation</h2>
+            <p>We face challenges that require collective intelligence at scales we have not yet achieved. Climate disruption, institutional failure, technological transformation, ecological degradation: these are interconnected, fast-moving, and larger than any individual or organization can address alone.</p>
+            <p>Habitat exists because we believe this gap can be closed. Not through any single technology or method, but through patient, systematic work on the infrastructure that enables groups to think and act together effectively.</p>
+            <p>This is patient work. This is humble work. This is collective work. And this is rooted work: supported by Earth, by the patterns of living systems that have preceded us, by the accumulated wisdom of billions of years of life learning to coordinate, adapt, and flourish together.</p>
+            <p>Habitat simply names an attempt to participate more consciously in that ongoing process.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Habitat is a purpose trust cultivating infrastructure for collective intelligence.</p>
+        <p>Currently operating through Roots Trust LCA, a Colorado Limited Cooperative Association.</p>
+    </footer>
+
+</body>
+</html>
